@@ -2,6 +2,7 @@ import pickle
 import pprint
 import json
 import smtplib
+from string import Template
 from .queries import *
 
 
@@ -34,16 +35,15 @@ def can_u_reserve_that_room(date_from, date_to, id, s):
 
 def sendemail(from_addr, to_addr_list, cc_addr_list,
               subject, message,
-              login, password,
-              smtpserver='smtp.gmail.com:587'):
+              login, password):
 
-    header = 'From: %s' % from_addr
-    header += 'To: %s' % ', '.join(to_addr_list)
-    header += 'Cc: %s' % ','.join(cc_addr_list)
-    header += 'Subject: %s' % subject
+    header = 'From: %s\n' % from_addr
+    header += 'To: %s\n' % ', '.join(to_addr_list)
+    header += 'Cc: %s\n' % ', '.join(cc_addr_list)
+    header += 'Subject: %s\n\n' % subject
     message = header + message
 
-    server = smtplib.SMTP(smtpserver)
+    server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
     server.login(login, password)
     problems = server.sendmail(from_addr, to_addr_list, message)
@@ -56,12 +56,36 @@ def reserve_that_room(name, surname, id_card, date_from, date_to, id_room, s):
 
 
 def create_mail(name, surname, id_card, date_from, date_to, id_room, s):
-    mail_content = '\n {} {}, with id card number: {}, reserved room number {} from {} to {}'.format(
+    mail_content = '{} {}, with id card number: {}, reserved room number {} from {} to {}'.format(
         name, surname, id_card, id_room, date_from, date_to)
 
-    sendemail('jelicastanojevicc@gmail.com', [
-        'jecykaaa96@gmail.com'], [], '[Reservation]', mail_content, 'jelicastanojevicc@gmail.com', 'asussonicmaster')
+    mails = []
+
+    while True:
+        email = input('Input gmail: ')
+        if(email == ''):
+            break
+        mails.append(email)
+
+    sendemail('jelicastanojevicc@gmail.com', mails, [], '[Reservation]',
+              mail_content, 'jelicastanojevicc@gmail.com', 'asussonicmaster')
+
     print(mail_content)
+
+    # templating
+    mail = Template(
+        '$name $surname, with id card number: $idc, reserved room number $idr from $df to $dt')
+    mail.substitute(name=name, surname=surname, idc=id_card,
+                    idr=id_room, df=date_from, dt=date_to)
+    print(mail)
+
+    #write in file
+    file = open("reservations.txt", "w")
+    file.write(mail_content)
+    file.close()
+
+    """ with open(“reservations.txt”, “w”) as f: 
+        f.write(mail_content)  """
 
 
 def room_exists(id, s):

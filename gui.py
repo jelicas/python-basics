@@ -15,22 +15,22 @@ class LogInWindow(object):
         self.frame = tk.Frame(parent)
         self.frame.grid()
         self.create_widgets()
-
+        self.s = Session()
         self.root.protocol("WM_DELETE_WINDOW", sys.exit)
 
     def hide(self):
         self.root.withdraw()
 
     def create_widgets(self):
-        s = Session()
 
         # inner function
+
         def check_user():
-            if(can_u_log_in(self.un_ent.get(), self.pw_ent.get(), s) == True):
+            if(can_u_log_in(self.un_ent.get(), self.pw_ent.get(), self.s) == True):
                 print("Yes")
                 tk.messagebox.showinfo("Log in", "Successfully logged in!")
                 self.hide()
-                menuFrame = MenuWindow()
+                menuFrame = MenuWindow(self.s)
             else:
                 print("No")
                 tk.messagebox.showinfo("Log in", "Wrong username or password!")

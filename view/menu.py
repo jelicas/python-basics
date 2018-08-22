@@ -6,28 +6,26 @@ from .rooms import RoomsWindow
 from .reserve import ReserveWindow
 from .cancel import CancelWindow
 from .price import PriceWindow
+from .reservations import ReservationsWindow
 
 
 class MenuWindow(tk.Toplevel):
 
-    def __init__(self):
+    def __init__(self, session):
         tk.Toplevel.__init__(self)
 
         self.grid()
         self.title("Menu")
         self.geometry("150x250")
         self.create_widgets_menu()
-
         self.protocol("WM_DELETE_WINDOW", sys.exit)
 
     def create_widgets_menu(self):
 
         def open_rooms_window():
-            # self.destroy()
             rooms_window = RoomsWindow()
 
         def open_reserve_window():
-            # self.destroy()
             reserve_window = ReserveWindow()
 
         def open_cancel_window():
@@ -35,6 +33,9 @@ class MenuWindow(tk.Toplevel):
 
         def open_price_window():
             price_window = PriceWindow()
+
+        def open_reservations_window():
+            price_window = ReservationsWindow()
 
         self.reserve_bttn = tk.Button(
             self, text="Reserve", command=open_reserve_window)
@@ -51,6 +52,10 @@ class MenuWindow(tk.Toplevel):
         self.cancel_bttn = tk.Button(
             self, text="Price", command=open_price_window)
         self.cancel_bttn.grid(row=5, column=0)
+
+        self.cancel_bttn = tk.Button(
+            self, text="Reservations", command=open_reservations_window)
+        self.cancel_bttn.grid(row=6, column=0)
 
 
 """if __name__ == '__main__':

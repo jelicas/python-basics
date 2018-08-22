@@ -17,7 +17,18 @@ class CancelWindow(tk.Toplevel):
         rooms = get_rooms(s)
 
         def cancel_res():
-            cancel_reservation(int(ent_id.get()), s)
+            if(ent_id.get() == ''):
+                tk.messagebox.showinfo(
+                    "Reservation", "You must enter reservation id.")
+                return
+            try:
+                id = int(ent_id.get())
+            except ValueError:
+                tk.messagebox.showinfo(
+                    "Reservation", "You must enter valid id.")
+                return
+
+            cancel_reservation(id, s)
             tk.messagebox.showinfo(
                 "Reservation", "Reservation has been canceled.")
 

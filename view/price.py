@@ -17,6 +17,17 @@ class PriceWindow(tk.Toplevel):
         s = Session()
 
         def show_price():
+            if(ent_id.get() == ''):
+                tk.messagebox.showinfo(
+                    "Reservation", "You must enter reservation id.")
+                return
+            try:
+                id = int(ent_id.get())
+            except ValueError:
+                tk.messagebox.showinfo(
+                    "Reservation", "You must enter valid id.")
+                return
+
             message = get_info_about_price(int(ent_id.get()), s)
             tk.messagebox.showinfo(
                 "Reservation", message)

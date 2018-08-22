@@ -21,13 +21,25 @@ class ReserveWindow(tk.Toplevel):
             self.destroy()
 
         def reserve():
+
+            try:
+                name = ent_name.get()
+                surname = ent_surname.get()
+                id = int(ent_id.get())
+                date1 = date(int(ent_year.get()), int(ent_month.get()), int(
+                    ent_day.get()))
+                date2 = date(int(ent_year2.get()), int(
+                    ent_month2.get()), int(ent_day2.get()))
+                id_room = int(ent_room.get())
+            except Exception:
+                tk.messagebox.showinfo(
+                    "Reservation", "Reservation is not valid!")
+
             if(room_exists(int(ent_room.get()), s) == True):
                 if(can_u_reserve_that_room(date(int(ent_year.get()), int(ent_month.get()), int(ent_day.get())), date(int(ent_year2.get()), int(ent_month2.get()), int(ent_day2.get())), int(ent_room.get()), s) == True):
                     tk.messagebox.showinfo("Room", "Room is available!")
-                    reserve_room(ent_name.get(), ent_surname.get(), int(ent_id.get()), date(int(ent_year.get()), int(ent_month.get()), int(
-                        ent_day.get())), date(int(ent_year2.get()), int(ent_month2.get()), int(ent_day2.get())), int(ent_room.get()), s)
-                    create_mail(ent_name.get(), ent_surname.get(), int(ent_id.get()), date(int(ent_year.get()), int(ent_month.get()), int(
-                        ent_day.get())), date(int(ent_year2.get()), int(ent_month2.get()), int(ent_day2.get())), int(ent_room.get()), s)
+                    reserve_room(name, surname, id, date1, date2, id_room, s)
+                    create_mail(name, surname, id, date1, date2, id_room, s)
                 else:
                     tk.messagebox.showinfo("Room", "Room is not available!")
             else:

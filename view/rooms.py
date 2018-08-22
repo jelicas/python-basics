@@ -4,7 +4,7 @@ from controller.queries import *
 
 class RoomsWindow(tk.Toplevel):
 
-    def __init__(self):
+    def __init__(self, session):
         tk.Toplevel.__init__(self)
 
         self.grid()
