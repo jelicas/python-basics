@@ -1,10 +1,11 @@
 import tkinter as tk
 from controller.queries import *
+from controller.config import s
 
 
 class RoomsWindow(tk.Toplevel):
 
-    def __init__(self, session):
+    def __init__(self):
         tk.Toplevel.__init__(self)
 
         self.grid()
@@ -13,7 +14,6 @@ class RoomsWindow(tk.Toplevel):
         self.create_widgets_rooms()
 
     def create_widgets_rooms(self):
-        s = Session()
         rooms = get_rooms(s)
         i = 1
 

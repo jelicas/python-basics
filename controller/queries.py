@@ -15,6 +15,7 @@ def get_hotel_employee_un_and_pass(s):
     for e in employees:
         un_and_pass = {'username': e.username, 'password': e.password}
         employees_un_and_pass += (un_and_pass,)
+        # employees_un_and_pass = employees_un_and_pass + (un_and_pass,)
 
     return employees_un_and_pass
 
@@ -24,7 +25,41 @@ def get_rooms(s):
     for r in rooms:
         print(r.id)
 
+    # r still exists
+    print(r.id)
+
+    # list comperhension, pair room id
+    r1 = [x.id for x in rooms if x.id % 2 == 0]
+    print(r1)
+
+    # lambda expressions
+    r2 = list(map(lambda x: x.id % 2 == 0, rooms))
+    print(r2)
+
+    r2 = list(filter(lambda x: x.id % 2 == 0, rooms))
+    print(r2)
+
+    # iterator
+    r = iter(rooms)
+    while r:
+        try:
+            rr = next(r)
+            print("Iterator")
+            print(rr.id)
+        except StopIteration:
+            break
+
+    # generator
+    for i in reverse(rooms):
+        print(i.id)
+
     return rooms
+
+
+# generator
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
 
 
 def get_room(id, s):

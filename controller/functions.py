@@ -33,9 +33,18 @@ def can_u_reserve_that_room(date_from, date_to, id, s):
     return is_room_available(date_from, date_to, id, s)
 
 
-def sendemail(from_addr, to_addr_list, cc_addr_list,
-              subject, message,
-              login, password):
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Something is happening before the function is called.")
+        func(*args, **kwargs)
+        print("Something is happening after the function is called.")
+    return wrapper
+
+
+@my_decorator
+def send_email(from_addr, to_addr_list, cc_addr_list,
+               subject, message,
+               login, password):
 
     header = 'From: %s\n' % from_addr
     header += 'To: %s\n' % ', '.join(to_addr_list)
@@ -51,10 +60,6 @@ def sendemail(from_addr, to_addr_list, cc_addr_list,
     server.quit()
 
 
-def reserve_that_room(name, surname, id_card, date_from, date_to, id_room, s):
-    reserve_room(name, surname, id_card, date_from, date_to, id_room, s)
-
-
 def create_mail(name, surname, id_card, date_from, date_to, id_room, s):
     mail_content = '{} {}, with id card number: {}, reserved room number {} from {} to {}'.format(
         name, surname, id_card, id_room, date_from, date_to)
@@ -67,8 +72,8 @@ def create_mail(name, surname, id_card, date_from, date_to, id_room, s):
             break
         mails.append(email)
 
-    sendemail('jelicastanojevicc@gmail.com', mails, [], '[Reservation]',
-              mail_content, 'jelicastanojevicc@gmail.com', 'asussonicmaster')
+    send_email('jelicastanojevicc@gmail.com', mails, [], '[Reservation]',
+               mail_content, 'jelicastanojevicc@gmail.com', 'asussonicmaster')
 
     print(mail_content)
 
@@ -86,6 +91,10 @@ def create_mail(name, surname, id_card, date_from, date_to, id_room, s):
 
     """ with open(“reservations.txt”, “w”) as f: 
         f.write(mail_content)  """
+
+
+def reserve_that_room(name, surname, id_card, date_from, date_to, id_room, s):
+    reserve_room(name, surname, id_card, date_from, date_to, id_room, s)
 
 
 def room_exists(id, s):

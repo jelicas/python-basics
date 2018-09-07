@@ -1,5 +1,6 @@
 import tkinter as tk
 from controller.queries import *
+from controller.config import s
 
 
 class CancelWindow(tk.Toplevel):
@@ -13,7 +14,6 @@ class CancelWindow(tk.Toplevel):
         self.create_widgets_cancel()
 
     def create_widgets_cancel(self):
-        s = Session()
         rooms = get_rooms(s)
 
         def cancel_res():

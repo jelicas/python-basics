@@ -1,5 +1,6 @@
 import tkinter as tk
 from controller.queries import *
+from controller.config import s
 
 
 class ReservationsWindow(tk.Toplevel):
@@ -13,7 +14,7 @@ class ReservationsWindow(tk.Toplevel):
         self.create_widgets_reservations()
 
     def create_widgets_reservations(self):
-        s = Session()
+        #s = Session()
         reservations = get_reservations(s)
         i = 1
 

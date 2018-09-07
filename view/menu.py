@@ -11,12 +11,12 @@ from .reservations import ReservationsWindow
 
 class MenuWindow(tk.Toplevel):
 
-    def __init__(self, session):
+    def __init__(self):
         tk.Toplevel.__init__(self)
 
         self.grid()
         self.title("Menu")
-        self.geometry("150x250")
+        self.geometry("150x170")
         self.create_widgets_menu()
         self.protocol("WM_DELETE_WINDOW", sys.exit)
 
@@ -56,25 +56,3 @@ class MenuWindow(tk.Toplevel):
         self.cancel_bttn = tk.Button(
             self, text="Reservations", command=open_reservations_window)
         self.cancel_bttn.grid(row=6, column=0)
-
-
-"""if __name__ == '__main__':
-        #app = MenuWindow()
-
-root = Tk()
-
-
-app = MenuWindow(root)
-
-
-root.mainloop()
-
-
-from Tkinter import *
-     
-for i in range(5):
-    for j in range(4):
-        l = Label(text='%d.%d' % (i, j), relief=RIDGE)
-        l.grid(row=i, column=j, sticky=NSEW)
-     
-mainloop()"""

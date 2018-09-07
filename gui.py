@@ -3,7 +3,8 @@ import tkinter as tk
 from tkinter import messagebox
 from controller.functions import *
 from view.menu import MenuWindow
-
+from controller.config import s
+from model.user import User
 # inheriting
 
 
@@ -15,7 +16,6 @@ class LogInWindow(object):
         self.frame = tk.Frame(parent)
         self.frame.grid()
         self.create_widgets()
-        self.s = Session()
         self.root.protocol("WM_DELETE_WINDOW", sys.exit)
 
     def hide(self):
@@ -24,13 +24,12 @@ class LogInWindow(object):
     def create_widgets(self):
 
         # inner function
-
         def check_user():
-            if(can_u_log_in(self.un_ent.get(), self.pw_ent.get(), self.s) == True):
+            if(can_u_log_in(self.un_ent.get(), self.pw_ent.get(), s) == True):
                 print("Yes")
                 tk.messagebox.showinfo("Log in", "Successfully logged in!")
                 self.hide()
-                menuFrame = MenuWindow(self.s)
+                menuFrame = MenuWindow()
             else:
                 print("No")
                 tk.messagebox.showinfo("Log in", "Wrong username or password!")
@@ -59,21 +58,7 @@ class LogInWindow(object):
 
 
 if __name__ == '__main__':
-
     root = tk.Tk()
     root.geometry("250x100")
     app = LogInWindow(root)
     root.mainloop()
-
-
-"""variable = Frame(root)
-
-variable.pack(side=, fill=, fg=, bg=, sticky=)
-
-variable = Button(frame, text=, fg, bg, command=)
-
-label_two = Label(frame_two, text='Hello, tkinter!', fg ='blue', bg='white')
-label_two.pack()
-
-photo
-"""

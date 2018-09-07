@@ -1,6 +1,7 @@
 import tkinter as tk
 from controller.queries import *
 from controller.functions import get_info_about_price
+from controller.config import s
 
 
 class PriceWindow(tk.Toplevel):
@@ -14,7 +15,7 @@ class PriceWindow(tk.Toplevel):
         self.create_widgets_cancel()
 
     def create_widgets_cancel(self):
-        s = Session()
+        #s = Session()
 
         def show_price():
             if(ent_id.get() == ''):

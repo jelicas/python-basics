@@ -2,6 +2,7 @@ from datetime import date
 import tkinter as tk
 from controller.queries import *
 from controller.functions import *
+from controller.config import s
 
 
 class ReserveWindow(tk.Toplevel):
@@ -11,11 +12,10 @@ class ReserveWindow(tk.Toplevel):
 
         self.grid()
         self.title("Reserve")
-        self.geometry("300x300")
+        self.geometry("600x240")
         self.create_widgets_reserve()
 
     def create_widgets_reserve(self):
-        s = Session()
 
         def open_menu():
             self.destroy()
@@ -69,46 +69,46 @@ class ReserveWindow(tk.Toplevel):
         lbl_day = tk.Label(self, text='Day ')
         lbl_day.grid(row=3, column=1)
         ent_day = tk.Entry(self)
-        ent_day.grid(row=3, column=2)
+        ent_day.grid(row=4, column=1)
 
         lbl_month = tk.Label(self, text='Month ')
-        lbl_month.grid(row=3, column=3)
+        lbl_month.grid(row=3, column=2)
         ent_month = tk.Entry(self)
-        ent_month.grid(row=3, column=4)
+        ent_month.grid(row=4, column=2)
 
         lbl_year = tk.Label(self, text='Year ')
-        lbl_year.grid(row=3, column=5)
+        lbl_year.grid(row=3, column=3)
         ent_year = tk.Entry(self)
-        ent_year.grid(row=3, column=6)
+        ent_year.grid(row=4, column=3)
 
         lbl_dt = tk.Label(self, text='Date to ')
-        lbl_dt.grid(row=4, column=0)
+        lbl_dt.grid(row=5, column=0)
 
         lbl_day2 = tk.Label(self, text='Day ')
-        lbl_day2.grid(row=4, column=1)
+        lbl_day2.grid(row=5, column=1)
         ent_day2 = tk.Entry(self)
-        ent_day2.grid(row=4, column=2)
+        ent_day2.grid(row=6, column=1)
 
         lbl_month2 = tk.Label(self, text='Month ')
-        lbl_month2.grid(row=4, column=3)
+        lbl_month2.grid(row=5, column=2)
         ent_month2 = tk.Entry(self)
-        ent_month2.grid(row=4, column=4)
+        ent_month2.grid(row=6, column=2)
 
         lbl_year2 = tk.Label(self, text='Year ')
-        lbl_year2.grid(row=4, column=5)
+        lbl_year2.grid(row=5, column=3)
         ent_year2 = tk.Entry(self)
-        ent_year2.grid(row=4, column=6)
+        ent_year2.grid(row=6, column=3)
 
         lbl_room = tk.Label(self, text='Room id ')
-        lbl_room.grid(row=5, column=0)
+        lbl_room.grid(row=7, column=0)
 
         ent_room = tk.Entry(self)
-        ent_room.grid(row=5, column=1)
+        ent_room.grid(row=7, column=1)
 
         submit_bttn = tk.Button(
             self, text="Submit", command=reserve)
-        submit_bttn.grid(row=7, column=1, sticky=tk.W)
+        submit_bttn.grid(row=8, column=2, sticky=tk.W)
 
         menu_bttn = tk.Button(
             self, text="Menu", command=open_menu)
-        menu_bttn.grid(row=8, column=1, sticky=tk.W)
+        menu_bttn.grid(row=9, column=2, sticky=tk.W)
